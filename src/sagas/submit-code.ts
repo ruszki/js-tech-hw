@@ -1,4 +1,10 @@
-import { takeEvery, select, call, put } from '@redux-saga/core/effects';
+import {
+  takeEvery,
+  select,
+  call,
+  put,
+  putResolve
+} from '@redux-saga/core/effects';
 import { SagaIterator } from 'redux-saga';
 import { SubmitCodeReducerType } from '../reducers/submit-code';
 import { RootState } from '../reducers/root';
@@ -40,12 +46,16 @@ function* submitCode(): SagaIterator {
         hash: uuid()
       };
 
-      yield put(
+      yield putResolve(
         shiftAddedAction({
           code,
           shift
         })
       );
     }
+  }
+
+  if (shift !== undefined) {
+    window.location.assign('/encrypt/' + shift.hash);
   }
 }

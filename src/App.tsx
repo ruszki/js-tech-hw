@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SecretCode from './components/SecretCode';
 import NotFound from './components/NotFound';
+import Encrypt from './components/Encrypt';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
         <div>
           <Switch>
             <Route path="/" exact component={SecretCode} />
+            <Route path="/encrypt/:uuid" exact component={Encrypt} />
             <Route component={NotFound} />
           </Switch>
         </div>
