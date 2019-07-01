@@ -55,7 +55,9 @@ export default class CeasarCoding {
     if (
       characterCode !== undefined &&
       baseCharacterCode !== undefined &&
-      maximumCharacterCode !== undefined
+      maximumCharacterCode !== undefined &&
+      characterCode >= baseCharacterCode &&
+      characterCode <= maximumCharacterCode
     ) {
       const normalizedCode = characterCode - baseCharacterCode;
 

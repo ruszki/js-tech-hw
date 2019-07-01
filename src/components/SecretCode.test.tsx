@@ -7,12 +7,7 @@ import { codeAction } from '../reducers/code';
 import { submitCodeAction } from '../reducers/submit-code';
 
 const code = 'code';
-let store: Store = {
-  dispatch: jest.fn(),
-  getState: jest.fn(),
-  subscribe: jest.fn(),
-  replaceReducer: jest.fn()
-};
+let store: Store;
 
 beforeEach(() => {
   store = {

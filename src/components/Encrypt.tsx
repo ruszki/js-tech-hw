@@ -5,7 +5,15 @@ import { messageAction } from '../reducers/message';
 import CeasarCoding from '../services/ceasar-coding';
 import { decryptMessageAction } from '../reducers/decrypt-message';
 
-const Encrypt: React.FC = ({ match }: any) => {
+const filterNonLetters = (message: string): string => {
+  return Array.from(message)
+    .filter((char: string) => char.match(/^[a-zA-Z]$/))
+    .join('');
+};
+
+const Encrypt: React.FC<{
+  match: any;
+}> = ({ match }: any) => {
   const code: string = useSelector(
     (state: RootState) => state.shiftHashes[match.params.uuid]
   );
@@ -22,28 +30,36 @@ const Encrypt: React.FC = ({ match }: any) => {
     <div>
       <p>Used secret code is {code}</p>
       <p>
-        Original message&nbsp;
+        <label htmlFor="originalMessage">
+          Original message<span aria-hidden="true">&nbsp;</span>
+        </label>
         <input
+          id="originalMessage"
           type="text"
           pattern="[a-zA-Z]*"
           value={message}
-          onChange={event => dispatch(messageAction(event.currentTarget.value))}
+          onChange={event =>
+            dispatch(messageAction(filterNonLetters(event.currentTarget.value)))
+          }
         />{' '}
         &#8594;{' '}
         <input
+          id="encryptedMessage"
           type="text"
           pattern="[a-zA-Z]*"
           value={CeasarCoding.encrypt(message, shift)}
           onChange={event =>
             dispatch(
               decryptMessageAction({
-                encryptedMessage: event.currentTarget.value,
+                encryptedMessage: filterNonLetters(event.currentTarget.value),
                 shift
               })
             )
           }
         />
-        &nbsp;Encrypted message
+        <label htmlFor="encryptedMessage">
+          <span aria-hidden="true">&nbsp;</span>Encrypted message
+        </label>
       </p>
     </div>
   );
