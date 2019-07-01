@@ -29,6 +29,7 @@ const Encrypt: React.FC<{
   return (
     <div>
       <p>Used secret code is {code}</p>
+
       <p>
         <label htmlFor="originalMessage">
           Original message<span aria-hidden="true">&nbsp;</span>
@@ -41,6 +42,8 @@ const Encrypt: React.FC<{
           onChange={event =>
             dispatch(messageAction(filterNonLetters(event.currentTarget.value)))
           }
+          autoFocus
+          tabIndex={1}
         />{' '}
         &#8594;{' '}
         <input
@@ -56,10 +59,15 @@ const Encrypt: React.FC<{
               })
             )
           }
+          tabIndex={2}
         />
         <label htmlFor="encryptedMessage">
           <span aria-hidden="true">&nbsp;</span>Encrypted message
         </label>
+      </p>
+
+      <p>
+        <a href="/">Use different code</a>
       </p>
     </div>
   );

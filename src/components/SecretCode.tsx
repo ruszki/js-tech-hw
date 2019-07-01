@@ -17,6 +17,8 @@ const SecretCode: React.FC = () => {
           type="text"
           onChange={event => dispatch(codeAction(event.currentTarget.value))}
           value={code}
+          autoFocus
+          tabIndex={1}
         />
       </p>
       <p>
