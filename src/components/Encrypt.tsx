@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../reducers/root';
 import { messageAction } from '../reducers/message';
-import CeasarCoding from '../services/ceasar-cofing';
+import CeasarCoding from '../services/ceasar-coding';
+import { decryptMessageAction } from '../reducers/decrypt-message';
 
 const Encrypt: React.FC = ({ match }: any) => {
   const code: string = useSelector(
@@ -33,6 +34,14 @@ const Encrypt: React.FC = ({ match }: any) => {
           type="text"
           pattern="[a-zA-Z]*"
           value={CeasarCoding.encrypt(message, shift)}
+          onChange={event =>
+            dispatch(
+              decryptMessageAction({
+                encryptedMessage: event.currentTarget.value,
+                shift
+              })
+            )
+          }
         />
         &nbsp;Encrypted message
       </p>

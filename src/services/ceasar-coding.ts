@@ -59,8 +59,10 @@ export default class CeasarCoding {
     ) {
       const normalizedCode = characterCode - baseCharacterCode;
 
+      const modulus = maximumCharacterCode - baseCharacterCode + 1;
+
       const newNormalizedCode =
-        shift(normalizedCode) % (maximumCharacterCode - baseCharacterCode + 1);
+        ((shift(normalizedCode) % modulus) + modulus) % modulus;
 
       const newCode = newNormalizedCode + baseCharacterCode;
 
