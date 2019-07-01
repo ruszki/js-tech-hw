@@ -1,11 +1,14 @@
 import { Action, createAction, handleAction } from 'redux-actions';
 
-const CodeReducerType: string = 'Code';
+const MessageReducerType: string = 'Message';
 
-export const codeAction = createAction(CodeReducerType, (code: string) => code);
+export const messageAction = createAction(
+  MessageReducerType,
+  (message: string) => message
+);
 
 export default handleAction(
-  CodeReducerType,
+  MessageReducerType,
   (state: string, action: Action<string>): string => action.payload,
   ''
 );
