@@ -1,33 +1,26 @@
-import React, { Dispatch, useRef } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from './reducers/root';
-import { codeAction } from './reducers/code';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import SecretCode from './components/SecretCode';
+import NotFound from './components/NotFound';
 
 const App: React.FC = () => {
-  const code: string = useSelector((state: RootState) => state.code);
-  const dispatch = useDispatch();
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>JavaScript technologies homework</h1>
-        <h2>Ceasar code</h2>
-      </header>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <h1>JavaScript technologies homework</h1>
+          <h2>Ceasar code</h2>
+        </header>
 
-      <div>
-        <p>
-          <label htmlFor="CodeInputId">Secret code: </label>
-          <input
-            id="CodeInputId"
-            type="text"
-            onChange={event => dispatch(codeAction(event.currentTarget.value))}
-            value={code}
-          />
-        </p>
+        <div>
+          <Switch>
+            <Route path="/" exact component={SecretCode} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 };
 
