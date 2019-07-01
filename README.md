@@ -20,7 +20,7 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode for client.<br>
 
-### `npm test-server`
+### `npm run test-server`
 
 Runs tests for server.<br>
 
