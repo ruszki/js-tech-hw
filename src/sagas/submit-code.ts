@@ -1,10 +1,4 @@
-import {
-  takeEvery,
-  select,
-  call,
-  put,
-  putResolve
-} from '@redux-saga/core/effects';
+import { takeEvery, select, call, putResolve } from '@redux-saga/core/effects';
 import { SagaIterator } from 'redux-saga';
 import { SubmitCodeReducerType } from '../reducers/submit-code';
 import { RootState } from '../reducers/root';
