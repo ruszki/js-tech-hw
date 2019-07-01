@@ -1,14 +1,19 @@
 import { Action, handleAction, createAction } from 'redux-actions';
 
-const ShiftAddedReducerType: string = 'ShiftAdded';
+export const ShiftAddedReducerType: string = 'ShiftAdded';
 
-export interface ShiftsState {
-  [c: string]: number;
+export interface ShiftState {
+  shift: number;
+  hash: string;
 }
 
-interface ShiftAddedInput {
+export interface ShiftsState {
+  [c: string]: ShiftState;
+}
+
+export interface ShiftAddedInput {
   code: string;
-  shift: number;
+  shift: ShiftState;
 }
 
 export const shiftAddedAction = createAction(

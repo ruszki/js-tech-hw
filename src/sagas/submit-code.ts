@@ -1,9 +1,9 @@
 import { takeEvery, select, call, put } from '@redux-saga/core/effects';
 import { SagaIterator } from 'redux-saga';
 import { SubmitCodeReducerType } from '../reducers/submit-code';
-import { Action } from 'redux-actions';
 import { RootState } from '../reducers/root';
-import { shiftAddedAction } from '../reducers/shifts';
+import { shiftAddedAction, ShiftState } from '../reducers/shifts';
+import uuid from 'uuid';
 
 export function* submitCodeSaga(): SagaIterator {
   yield takeEvery(SubmitCodeReducerType, submitCode);
@@ -14,9 +14,9 @@ interface ShiftResponse {
   shift: number;
 }
 
-function* submitCode(action: Action<undefined>): SagaIterator {
+function* submitCode(): SagaIterator {
   const code: string = yield select((state: RootState) => state.code);
-  let shift: number | undefined = yield select(
+  let shift: ShiftState | undefined = yield select(
     (state: RootState) => state.shifts[code]
   );
 
@@ -35,7 +35,10 @@ function* submitCode(action: Action<undefined>): SagaIterator {
         response.json.bind(response)
       );
 
-      shift = jsonResponse.shift;
+      shift = {
+        shift: jsonResponse.shift,
+        hash: uuid()
+      };
 
       yield put(
         shiftAddedAction({
